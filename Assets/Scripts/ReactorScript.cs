@@ -70,6 +70,7 @@ namespace Assets.Scripts
                 lights[4].GetComponent<Renderer>().materials = materials;
             }
 
+            //TODO Lerp 
             rechargerLight.position = new Vector3(rechargerLight.position.x, heights[TrashCount], rechargerLight.position.z);
             rechargerCollider.radius = ranges[TrashCount];
         }

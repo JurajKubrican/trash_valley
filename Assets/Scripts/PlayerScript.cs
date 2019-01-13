@@ -9,6 +9,7 @@ namespace Assets.Scripts
         public float movementSpeed = 10.0F;
 
         public GameObject HUD;
+        public GameObject PauseMenu;
         private HUDScript hudScript;
 
 
@@ -60,16 +61,18 @@ namespace Assets.Scripts
 
         private void FixedUpdate()
         {
-            if (isRecharging)
+            energy = isRecharging ? Math.Min(energy + 100 * Time.deltaTime, 100) : Math.Max(energy - 10 * Time.deltaTime, 0);
+            if (Math.Abs(energy) < 0.0001)
             {
-                energy = Math.Min(energy + 100 * Time.deltaTime, 100);
-            }
-            else
-            {
-                energy = Math.Max(energy - 10 * Time.deltaTime, 0);
+                PauseMenu.GetComponent<PauseMenuScript>().Die();
             }
 
             hudScript.SetEnergy((int) energy);
+
+            if (transform.position.y < -10)
+            {
+                PauseMenu.GetComponent<PauseMenuScript>().Die();
+            }
         }
 
 
