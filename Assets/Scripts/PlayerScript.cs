@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
 
 namespace Assets.Scripts
 {
@@ -13,7 +12,7 @@ namespace Assets.Scripts
         private HUDScript hudScript;
 
 
-        private bool carryingTrash = false;
+        public bool carryingTrash = false;
         private bool isInRangeOfTrash = false;
         private bool isInRangeOfReactor = false;
         private GameObject trashGo;
@@ -36,17 +35,22 @@ namespace Assets.Scripts
                 if (isInRangeOfTrash && !carryingTrash)
                 {
                     carryingTrash = true;
-                    hudScript.SetCarrying(true);
+                    isInRangeOfTrash = false;
                     Destroy(trashGo);
+                }else if (isInRangeOfTrash && carryingTrash)
+                {
+                    hudScript.SetAux();
                 }
+
 
                 if (isInRangeOfReactor && carryingTrash)
                 {
-                    this.carryingTrash = false;
-                    hudScript.SetCarrying(false);
+                    carryingTrash = false;
                     reactorGo.GetComponent<ReactorScript>().AddTrash();
                 }
             }
+
+            hudScript.SetCarrying(carryingTrash);
 
             var moveHorizontal = Input.GetAxisRaw("Horizontal");
             var moveVertical = Input.GetAxisRaw("Vertical");
@@ -61,7 +65,9 @@ namespace Assets.Scripts
 
         private void FixedUpdate()
         {
-            energy = isRecharging ? Math.Min(energy + 100 * Time.deltaTime, 100) : Math.Max(energy - 10 * Time.deltaTime, 0);
+            energy = isRecharging
+                ? Math.Min(energy + 100 * Time.deltaTime, 100)
+                : Math.Max(energy - 10 * Time.deltaTime, 0);
             if (Math.Abs(energy) < 0.0001)
             {
                 PauseMenu.GetComponent<PauseMenuScript>().Die();
@@ -78,7 +84,6 @@ namespace Assets.Scripts
 
         private void OnTriggerEnter(Component other)
         {
-            Debug.Log(other.tag);
             switch (other.tag)
             {
                 case "trash":
@@ -93,6 +98,9 @@ namespace Assets.Scripts
                     break;
                 case "recharger":
                     isRecharging = true;
+                    break;
+                case "pit":
+                    PauseMenu.GetComponent<PauseMenuScript>().Die();
                     break;
             }
         }
