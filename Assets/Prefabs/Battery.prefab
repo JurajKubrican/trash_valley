@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6671631015430272118
 Transform:
@@ -93,7 +93,7 @@ GameObject:
   m_TagString: battery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6671631017343677153
 Transform:
@@ -147,6 +147,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: eef823a0d743d8942b54d878cc992b37, type: 3}
       propertyPath: m_Name
       value: Battery1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: eef823a0d743d8942b54d878cc992b37, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eef823a0d743d8942b54d878cc992b37, type: 3}
       propertyPath: m_LocalPosition.x

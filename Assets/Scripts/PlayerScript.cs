@@ -25,6 +25,9 @@ namespace Assets.Scripts
         public double energy = 100;
         private bool isRecharging = false;
 
+        private bool isInWater = false;
+        private bool isWin = false;
+
         private void Start()
         {
             hudScript = HUD.GetComponent<HUDScript>();
@@ -58,6 +61,10 @@ namespace Assets.Scripts
                 {
                     carryingTrash = false;
                     reactorGo.GetComponent<ReactorScript>().AddTrash();
+                    if (reactorGo.GetComponent<ReactorScript>().TrashCount == 4)
+                    {
+                        isWin = true;
+                    }
                 }
             }
 
@@ -76,9 +83,19 @@ namespace Assets.Scripts
 
         private void FixedUpdate()
         {
-            energy = isRecharging
-                ? Math.Min(energy + 100 * Time.deltaTime, MaxBat)
-                : Math.Max(energy - 15 * Time.deltaTime, 0);
+            if (isWin)
+            {
+                PauseMenu.GetComponent<PauseMenuScript>().Win();
+            }
+
+            if (isRecharging)
+                energy = Math.Min(energy + 100 * Time.deltaTime, MaxBat);
+            else
+            {
+                energy = Math.Max(energy - (15 * (isInWater ? 10 : 1)) * Time.deltaTime, 0);
+            }
+
+
             if (Math.Abs(energy) < 0.0001)
             {
                 PauseMenu.GetComponent<PauseMenuScript>().Die();
@@ -90,6 +107,7 @@ namespace Assets.Scripts
             {
                 PauseMenu.GetComponent<PauseMenuScript>().Die();
             }
+
         }
 
 
@@ -101,6 +119,9 @@ namespace Assets.Scripts
                     other.GetComponent<BatteryScript>().SetActive(true);
                     batteryGo = other.gameObject;
                     isInRangeOfBattery = true;
+                    break;
+                case "water":
+                    isInWater = true;
                     break;
                 case "trash":
                     other.GetComponent<TrashScript>().SetActive(true);
@@ -128,6 +149,9 @@ namespace Assets.Scripts
                 case "battery":
                     other.GetComponent<BatteryScript>().SetActive(false);
                     isInRangeOfBattery = true;
+                    break;
+                case "water":
+                    isInWater = false;
                     break;
                 case "trash":
                     other.GetComponent<TrashScript>().SetActive(false);

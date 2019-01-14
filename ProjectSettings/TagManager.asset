@@ -10,6 +10,7 @@ TagManager:
   - UI
   - pit
   - battery
+  - water
   layers:
   - Default
   - TransparentFX

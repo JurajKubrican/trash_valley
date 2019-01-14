@@ -10,12 +10,17 @@ PrefabInstance:
     - target: {fileID: 901736410380653397, guid: 2649381f1bd04994a8f2ca6f28417ec4,
         type: 3}
       propertyPath: m_Name
-      value: Wall4x1 (7)
+      value: Wall1X4
+      objectReference: {fileID: 0}
+    - target: {fileID: 901736410380653397, guid: 2649381f1bd04994a8f2ca6f28417ec4,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4525272526274806292, guid: 2649381f1bd04994a8f2ca6f28417ec4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4525272526274806292, guid: 2649381f1bd04994a8f2ca6f28417ec4,
         type: 3}
@@ -25,7 +30,7 @@ PrefabInstance:
     - target: {fileID: 4525272526274806292, guid: 2649381f1bd04994a8f2ca6f28417ec4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 21
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4525272526274806292, guid: 2649381f1bd04994a8f2ca6f28417ec4,
         type: 3}
