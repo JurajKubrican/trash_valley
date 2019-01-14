@@ -10,13 +10,16 @@ namespace Assets.Scripts
         public GameObject HUD;
         public GameObject PauseMenu;
         private HUDScript hudScript;
+        public double MaxBat = 100;
 
 
         public bool carryingTrash = false;
         private bool isInRangeOfTrash = false;
+        private bool isInRangeOfBattery = false;
         private bool isInRangeOfReactor = false;
         private GameObject trashGo;
         private GameObject reactorGo;
+        private GameObject batteryGo;
 
 
         public double energy = 100;
@@ -37,11 +40,19 @@ namespace Assets.Scripts
                     carryingTrash = true;
                     isInRangeOfTrash = false;
                     Destroy(trashGo);
-                }else if (isInRangeOfTrash && carryingTrash)
+                }
+                else if (isInRangeOfTrash && carryingTrash)
                 {
                     hudScript.SetAux();
                 }
 
+                if (isInRangeOfBattery)
+                {
+                    Destroy(batteryGo);
+                    isInRangeOfBattery = false;
+                    MaxBat += 100;
+                    energy += 100;
+                }
 
                 if (isInRangeOfReactor && carryingTrash)
                 {
@@ -66,8 +77,8 @@ namespace Assets.Scripts
         private void FixedUpdate()
         {
             energy = isRecharging
-                ? Math.Min(energy + 100 * Time.deltaTime, 100)
-                : Math.Max(energy - 10 * Time.deltaTime, 0);
+                ? Math.Min(energy + 100 * Time.deltaTime, MaxBat)
+                : Math.Max(energy - 15 * Time.deltaTime, 0);
             if (Math.Abs(energy) < 0.0001)
             {
                 PauseMenu.GetComponent<PauseMenuScript>().Die();
@@ -86,6 +97,11 @@ namespace Assets.Scripts
         {
             switch (other.tag)
             {
+                case "battery":
+                    other.GetComponent<BatteryScript>().SetActive(true);
+                    batteryGo = other.gameObject;
+                    isInRangeOfBattery = true;
+                    break;
                 case "trash":
                     other.GetComponent<TrashScript>().SetActive(true);
                     trashGo = other.gameObject;
@@ -109,6 +125,10 @@ namespace Assets.Scripts
         {
             switch (other.tag)
             {
+                case "battery":
+                    other.GetComponent<BatteryScript>().SetActive(false);
+                    isInRangeOfBattery = true;
+                    break;
                 case "trash":
                     other.GetComponent<TrashScript>().SetActive(false);
                     isInRangeOfTrash = false;

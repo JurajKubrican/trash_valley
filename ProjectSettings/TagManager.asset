@@ -9,6 +9,7 @@ TagManager:
   - recharger
   - UI
   - pit
+  - battery
   layers:
   - Default
   - TransparentFX

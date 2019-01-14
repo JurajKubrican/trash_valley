@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5419423127872102207}
   m_LocalRotation: {x: 0.30404744, y: -0, z: -0, w: 0.9526569}
-  m_LocalPosition: {x: 0, y: 2.900898, z: 0}
+  m_LocalPosition: {x: 0, y: 2.900898, z: -0.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5419423127956943053}
@@ -141,6 +141,7 @@ MonoBehaviour:
   movementSpeed: 10
   HUD: {fileID: 0}
   PauseMenu: {fileID: 0}
+  carryingTrash: 0
   energy: 100
 --- !u!54 &5419423127956943050
 Rigidbody:
