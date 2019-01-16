@@ -1,14 +1,13 @@
-﻿using TMPro;
+using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
     public class TutorialScript : MonoBehaviour
     {
-        public int Step = 0;
+        private int step = 0;
         public GameObject Panel;
         private TextMeshProUGUI ugui;
-        private int tutorialStep = 0;
         private PlayerScript player;
 
 
@@ -39,8 +38,7 @@ namespace Assets.Scripts
         {
             ugui = Panel.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             player = gameObject.GetComponent<PlayerScript>();
-            ShowText(Step++);
-            Time.timeScale = 0;
+            
         }
 
 
@@ -48,32 +46,38 @@ namespace Assets.Scripts
         {
             if (Input.GetKeyDown("space"))
             {
-                if (Step == 17)
+                if (step == 17)
                 {
                     Time.timeScale = 1;
                 }
-                else if (Step < 9 || Step > 11)
+                else if (step < 9 || step > 11)
                 {
-                    ShowText(Step++);
+                    ShowText(step++);
                 }
-                else if (Step == 9)
+                else if (step == 9)
                 {
-                    ShowText(Step++);
+                    ShowText(step++);
                     Time.timeScale = 1;
                 }
             }
 
-            if (Input.GetKeyDown("e"))
+            if (Input.GetKeyDown("e")|| Input.GetKeyDown("3"))
             {
-                if (Step == 10 && player.carryingTrash)
+                if (step == 10 && player.carryingTrash)
                 {
-                    ShowText(Step++);
+                    ShowText(step++);
                     Time.timeScale = 1;
                 }
-                else if (Step == 11 && player.carryingTrash == false)
+                else if (step == 11 && player.carryingTrash == false)
                 {
-                    ShowText(Step++);
+                    ShowText(step++);
                 }
+            }
+
+            if (step == 0)
+            {
+                ShowText(step++);
+                Time.timeScale = 0;
             }
         }
 
