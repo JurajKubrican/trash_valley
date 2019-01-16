@@ -1056,7 +1056,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -2543,14 +2543,6 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: 4897e8b654a8a7f489e6681cfe3fb50a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: 4897e8b654a8a7f489e6681cfe3fb50a, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4897e8b654a8a7f489e6681cfe3fb50a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.35
@@ -2606,6 +2598,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 4897e8b654a8a7f489e6681cfe3fb50a, type: 3}
       propertyPath: m_LocalScale.z
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 4897e8b654a8a7f489e6681cfe3fb50a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 4897e8b654a8a7f489e6681cfe3fb50a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4897e8b654a8a7f489e6681cfe3fb50a, type: 3}
