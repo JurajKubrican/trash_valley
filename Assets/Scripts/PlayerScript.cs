@@ -120,6 +120,12 @@ namespace Assets.Scripts
                 {
                     siren.Play();
                 }
+            }else if (energy > 35)
+            {
+                if (siren.isPlaying)
+                {
+                    siren.Stop();
+                }
             }
         }
 
