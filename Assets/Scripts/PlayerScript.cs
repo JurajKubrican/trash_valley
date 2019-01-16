@@ -10,7 +10,6 @@ namespace Assets.Scripts
         public GameObject HUD;
         public GameObject PauseMenu;
         private HUDScript hudScript;
-        public double MaxBat = 100;
 
 
         private AudioSource siren;
@@ -24,7 +23,7 @@ namespace Assets.Scripts
         private GameObject reactorGo;
         private GameObject batteryGo;
 
-
+        public double maxEnergy = 100;
         public double energy = 100;
         private bool isRecharging = false;
 
@@ -57,7 +56,7 @@ namespace Assets.Scripts
                 {
                     Destroy(batteryGo);
                     isInRangeOfBattery = false;
-                    MaxBat += 100;
+                    maxEnergy += 100;
                     energy += 100;
                 }
 
@@ -93,7 +92,7 @@ namespace Assets.Scripts
             }
 
             if (isRecharging)
-                energy = Math.Min(energy + 100 * Time.deltaTime, MaxBat);
+                energy = Math.Min(energy + 100 * Time.deltaTime, maxEnergy);
             else
             {
                 energy = Math.Max(energy - (15 * (isInWater ? 10 : 1)) * Time.deltaTime, 0);
@@ -103,13 +102,15 @@ namespace Assets.Scripts
             if (Math.Abs(energy) < 0.0001)
             {
                 PauseMenu.GetComponent<PauseMenuScript>().Die();
+                siren.Stop();
             }
 
-            hudScript.SetEnergy((int) energy);
+            hudScript.SetEnergy(maxEnergy,energy);
 
             if (transform.position.y < -10)
             {
                 PauseMenu.GetComponent<PauseMenuScript>().Die();
+                siren.Stop();
             }
 
             if (energy < 35)
@@ -149,6 +150,7 @@ namespace Assets.Scripts
                     break;
                 case "pit":
                     PauseMenu.GetComponent<PauseMenuScript>().Die();
+                    siren.Stop();
                     break;
             }
         }
