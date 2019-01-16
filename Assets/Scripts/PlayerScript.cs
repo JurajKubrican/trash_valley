@@ -89,6 +89,7 @@ namespace Assets.Scripts
             if (isWin)
             {
                 PauseMenu.GetComponent<PauseMenuScript>().Win();
+                siren.Stop();
             }
 
             if (isRecharging)

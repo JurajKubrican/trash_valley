@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +37,7 @@ namespace Assets.Scripts
 
         public void SetEnergy(double maxEnergy, double energy)
         {
-            items[1].GetComponent<TextMeshProUGUI>().SetText("Energy: " + energy);
+            items[1].GetComponent<TextMeshProUGUI>().SetText("Energy: " +  Math.Round(energy) );
             items[3].GetComponent<Slider>().value = (float) (energy / maxEnergy);
         }
 

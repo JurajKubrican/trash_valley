@@ -38,7 +38,6 @@ namespace Assets.Scripts
         {
             ugui = Panel.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             player = gameObject.GetComponent<PlayerScript>();
-            
         }
 
 
@@ -49,6 +48,7 @@ namespace Assets.Scripts
                 if (step == 17)
                 {
                     Time.timeScale = 1;
+                    Panel.SetActive(false);
                 }
                 else if (step < 9 || step > 11)
                 {
@@ -61,17 +61,15 @@ namespace Assets.Scripts
                 }
             }
 
-            if (Input.GetKeyDown("e")|| Input.GetKeyDown("3"))
+
+            if (step == 10 && player.carryingTrash)
             {
-                if (step == 10 && player.carryingTrash)
-                {
-                    ShowText(step++);
-                    Time.timeScale = 1;
-                }
-                else if (step == 11 && player.carryingTrash == false)
-                {
-                    ShowText(step++);
-                }
+                ShowText(step++);
+                Time.timeScale = 1;
+            }
+            else if (step == 11 && player.carryingTrash == false)
+            {
+                ShowText(step++);
             }
 
             if (step == 0)
