@@ -13,6 +13,9 @@ namespace Assets.Scripts
         public double MaxBat = 100;
 
 
+        private AudioSource siren;
+
+
         public bool carryingTrash = false;
         private bool isInRangeOfTrash = false;
         private bool isInRangeOfBattery = false;
@@ -31,6 +34,7 @@ namespace Assets.Scripts
         private void Start()
         {
             hudScript = HUD.GetComponent<HUDScript>();
+            siren = gameObject.GetComponent<AudioSource>();
         }
 
 
@@ -108,6 +112,13 @@ namespace Assets.Scripts
                 PauseMenu.GetComponent<PauseMenuScript>().Die();
             }
 
+            if (energy < 35)
+            {
+                if (!siren.isPlaying)
+                {
+                    siren.Play();
+                }
+            }
         }
 
 

@@ -2,8 +2,6 @@
 
 namespace Assets.Scripts
 {
-
-  
     public class ReactorScript : MonoBehaviour
     {
         private GameObject activeBase;
@@ -33,9 +31,6 @@ namespace Assets.Scripts
             18,
             23,
         };
-
-
-
 
 
         private void Start()
@@ -70,10 +65,9 @@ namespace Assets.Scripts
             }
 
             //TODO Lerp 
-            rechargerLight.position = new Vector3(rechargerLight.position.x, heights[TrashCount], rechargerLight.position.z);
+            rechargerLight.position =
+                new Vector3(rechargerLight.position.x, heights[TrashCount], rechargerLight.position.z);
             rechargerCollider.radius = ranges[TrashCount];
         }
-
-      
     }
 }

@@ -28,7 +28,7 @@ namespace Assets.Scripts
                 waterfalls[1].Stop();
             }
 
-            collider.enabled = (Time.time -.3) % 2 < 1;
+            collider.enabled = (Time.time - .3) % 2 < 1;
         }
     }
 }

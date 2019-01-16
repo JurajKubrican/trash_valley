@@ -12,7 +12,7 @@ namespace Assets.Scripts
         private PlayerScript player;
 
 
-        public string[] texts = new[]
+        private readonly string[] texts = new[]
         {
             "You are alone on this planet filled with trash [space]",
             "You are a solar powered trash can [space]",
@@ -25,14 +25,13 @@ namespace Assets.Scripts
             "If you find a trash pile pick it up (E) and bring it to the Trash Reactor(the towery looking thing). [space]",
             "Now go pick up some trash (E)",
             "Now go drop it at the reactor (E)",
-            "Once You pick up all the trash you can move on with your life",
-            "Oh one more thing...",
-            "This should be pretty obvious, but don't touch the lava",
-            "Also (And I don't expect you to comprehend the concept) you are a ROBOT so keep away from the water",
-            "Water drains your energy.",
-            "Good luck ;)",
+            "Once You pick up all the trash you can move on with your life [space]",
+            "Oh one more thing... [space]",
+            "This should be pretty obvious, but don't touch the lava [space]",
+            "Also (And I don't expect you to comprehend the concept) you are a ROBOT so keep away from the water [space]",
+            "Water drains your energy. [space]",
+            "Good luck ;) [space]",
         };
-
 
 
         // Start is called before the first frame update
@@ -41,7 +40,7 @@ namespace Assets.Scripts
             ugui = Panel.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             player = gameObject.GetComponent<PlayerScript>();
             ShowText(Step++);
-
+            Time.timeScale = 0;
         }
 
 
@@ -49,39 +48,33 @@ namespace Assets.Scripts
         {
             if (Input.GetKeyDown("space"))
             {
-                if (Step <= 8 || Step >= 11)
-                {
-                    ShowText(Step++);
-                }
-                else if (tutorialStep == 0)
+                if (Step == 17)
                 {
                     Time.timeScale = 1;
                 }
-
+                else if (Step < 9 || Step > 11)
+                {
+                    ShowText(Step++);
+                }
+                else if (Step == 9)
+                {
+                    ShowText(Step++);
+                    Time.timeScale = 1;
+                }
             }
 
-            if (Input.GetKeyDown("e") && tutorialStep == 0)
+            if (Input.GetKeyDown("e"))
             {
-                ShowText(Step++);
+                if (Step == 10 && player.carryingTrash)
+                {
+                    ShowText(Step++);
+                    Time.timeScale = 1;
+                }
+                else if (Step == 11 && player.carryingTrash == false)
+                {
+                    ShowText(Step++);
+                }
             }
-
-            if (Step == 1)
-            {
-                Time.timeScale = 0;
-            }
-            if (tutorialStep == 0 && player.carryingTrash)
-            {
-                tutorialStep = 1;
-                ShowText(Step++);
-                Time.timeScale = 1;
-            }else if (tutorialStep == 1 && !player.carryingTrash)
-            {
-                tutorialStep = 1;
-                ShowText(Step++);
-            }
-
-        
-
         }
 
         private void ShowText(int i)

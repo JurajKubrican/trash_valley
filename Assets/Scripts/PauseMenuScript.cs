@@ -12,21 +12,20 @@ namespace Assets.Scripts
 
         void Start()
         {
-            
-
             panel = gameObject.transform.Find("Panel").gameObject;
             foreach (Transform child in panel.transform)
             {
                 Debug.Log(child.name);
                 menus.Add(child.gameObject);
             }
+
             hidePanel();
             panel.SetActive(false);
         }
 
         void Update()
         {
-            if (Input.GetKeyDown("escape") )
+            if (Input.GetKeyDown("escape"))
             {
                 if (panel.activeSelf && isPause)
                     Resume();

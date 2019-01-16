@@ -10,6 +10,7 @@ namespace Assets.Scripts
         public GameObject[] items;
 
         private float tToHide;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -30,13 +31,11 @@ namespace Assets.Scripts
         public void SetCarrying(bool carrying)
         {
             items[0].SetActive(carrying);
-
         }
 
         public void SetEnergy(int energy)
         {
             items[1].GetComponent<TextMeshProUGUI>().SetText("Energy: " + energy);
-
         }
 
         public void SetAux()
@@ -44,7 +43,5 @@ namespace Assets.Scripts
             items[2].SetActive(true);
             tToHide = Time.time + 5;
         }
-
-       
     }
 }
